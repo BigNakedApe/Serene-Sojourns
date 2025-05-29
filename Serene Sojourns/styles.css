@@ -1,0 +1,527 @@
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Переменные */
+:root {
+    --bg-primary: #b2dfdb;
+    --bg-secondary: #80cbc4;
+    --text-primary: #004d40;
+    --text-secondary: #00695c;
+    --accent: #26a69a;
+    --accent-hover: #ff8a65;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --shadow: rgba(0, 50, 100, 0.2);
+    --shadow-hover: rgba(0, 50, 100, 0.4);
+    --header-overlay: rgba(0, 77, 64, 0.5);
+    --footer-bg: #004d40;
+    --input-border: #4db6ac;
+    --input-focus: rgba(38, 166, 154, 0.5);
+}
+
+body.dark-theme {
+    --bg-primary: #0d302d;
+    --bg-secondary: #1b403d;
+    --text-primary: #b2dfdb;
+    --text-secondary: #80cbc4;
+    --card-bg: rgba(29, 46, 45, 0.85);
+    --shadow: rgba(0, 0, 0, 0.6);
+    --shadow-hover: rgba(0, 0, 0, 0.8);
+    --header-overlay: rgba(0, 20, 40, 0.5);
+    --footer-bg: #0a1f1e;
+    --input-border: #4db6ac;
+    --input-focus: rgba(38, 166, 154, 0.7);
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Хедер с параллаксом */
+header.parallax {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(var(--header-overlay), var(--header-overlay)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat fixed;
+    z-index: -2;
+}
+
+.wave-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100px;
+    z-index: -1;
+    animation: waveFlow 20s linear infinite;
+}
+
+.header-content {
+    z-index: 2;
+    color: white;
+    padding: 1rem;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    animation: waveUp 1.8s ease-out;
+}
+
+header p {
+    font-size: clamp(1.2rem, 3vw, 1.9rem);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    animation: waveUp 2s ease-out 0.3s backwards;
+}
+
+.btn {
+    padding: 1.1rem 3.5rem;
+    background: linear-gradient(45deg, var(--accent), var(--accent-hover));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    transition: transform 0.4s, box-shadow 0.4s;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.btn:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px var(--shadow-hover);
+}
+
+.btn:active {
+    transform: scale(0.92);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Переключатель темы */
+.theme-toggle {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.theme-toggle svg {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.theme-toggle .sun {
+    opacity: 1;
+}
+
+.theme-toggle .moon {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.dark-theme .theme-toggle .sun {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.dark-theme .theme-toggle .moon {
+    opacity: 1;
+    transform: rotate(0);
+}
+
+.theme-toggle:hover svg {
+    transform: rotate(150deg) scale(1.2);
+}
+
+/* Секции */
+.destinations, .explore, .booking {
+    padding: clamp(3.5rem, 7vw, 6rem) 2rem;
+    position: relative;
+    background: url('https://www.transparenttextures.com/patterns/water.png'), linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+    z-index: 2;
+}
+
+.destinations h2, .explore h2, .booking h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 3px 8px var(--shadow);
+}
+
+/* Карточки */
+.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding: 1rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-secondary);
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+.card {
+    flex: 0 0 350px;
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px var(--shadow);
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.4s ease;
+    background: var(--card-bg) url('https://www.transparenttextures.com/patterns/coconut-fibre.png');
+    scroll-snap-align: center;
+}
+
+.card.visible {
+    opacity: 1;
+    animation: sway 4s ease-in-out infinite;
+}
+
+.card:hover {
+    transform: perspective(1000px) rotateY(5deg);
+    box-shadow: 0 15px 40px var(--shadow-hover);
+}
+
+.card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    filter: brightness(65%);
+    transition: filter 0.6s ease;
+}
+
+.card:hover img {
+    filter: brightness(100%);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.8rem;
+    color: white;
+    text-align: center;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+.card-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.card-content p {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Секция с картой и фильтрами */
+.explore {
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+    position: relative;
+}
+
+.explore::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--header-overlay);
+    z-index: 0;
+}
+
+.explore-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#map {
+    height: 650px;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px var(--shadow);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    background: var(--card-bg);
+}
+
+#map.loaded {
+    opacity: 1;
+}
+
+.filter {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    background: var(--card-bg) url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 6px 25px var(--shadow);
+}
+
+.filter div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.filter label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.filter select {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    border: 2px solid var(--input-border);
+    border-radius: 15px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.4s, box-shadow 0.4s, transform 0.4s;
+}
+
+.filter select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--input-focus);
+    outline: none;
+}
+
+.filter select:hover {
+    transform: translateY(-4px);
+}
+
+.reset-btn {
+    background: linear-gradient(45deg, #ff8a65, #ffab91);
+    padding: 0.8rem 2.5rem;
+}
+
+.reset-btn:hover {
+    background: linear-gradient(45deg, #f57c00, #ff8a65);
+    box-shadow: 0 10px 25px var(--shadow-hover);
+}
+
+/* Форма бронирования */
+.booking {
+    background: url('https://www.transparenttextures.com/patterns/bamboo.png'), linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+}
+
+.booking form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--card-bg);
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px var(--shadow);
+    transform: translateX(100px);
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+}
+
+.booking form.visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.input-group {
+    position: relative;
+}
+
+.booking input, .booking select {
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--input-border);
+    border-radius: 15px;
+    font-size: 1rem;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    transition: border-color 0.4s, box-shadow 0.4s;
+    width: 100%;
+    padding-right: 3.5rem;
+}
+
+.booking input:focus, .booking select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--input-focus);
+    outline: none;
+    background: linear-gradient(90deg, rgba(38, 166, 154, 0.1), transparent);
+}
+
+.input-icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: var(--text-secondary);
+}
+
+.booking .btn {
+    padding: 1.1rem;
+    font-size: 1.3rem;
+}
+
+.booking .btn:hover {
+    transform: scale(1.08);
+}
+
+/* Футер */
+footer {
+    background: var(--footer-bg);
+    color: white;
+    text-align: center;
+    padding: 2.5rem;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+footer .sunset {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(180deg, #ff8a65, #ffab91, transparent);
+    animation: sunset 20s ease-in-out infinite;
+}
+
+/* Анимации */
+@keyframes waveUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sway {
+    0%, 100% { transform: perspective(1000px) rotateY(0deg); }
+    50% { transform: perspective(1000px) rotateY(3deg); }
+}
+
+@keyframes waveFlow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-720px); }
+}
+
+@keyframes sunset {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .filter {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .card {
+        flex: 0 0 280px;
+    }
+
+    header h1 {
+        font-size: clamp(2.2rem, 7vw, 4rem);
+    }
+
+    header p {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .horizontal-scroll {
+        gap: 1rem;
+    }
+
+    .booking form {
+        padding: 2rem;
+    }
+
+    .wave-layer {
+        animation: waveFlow 15s linear infinite;
+        height: 80px;
+    }
+}

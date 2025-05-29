@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene Sojourns</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+<body>
+    <header class="parallax">
+        <div class="parallax-bg"></div>
+        <svg class="wave-layer" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,50 C360,100 1080,0 1440,50 L1440,100 L0,100 Z" fill="rgba(38, 166, 154, 0.7)"/>
+        </svg>
+        <div class="header-content">
+            <h1>Serene Sojourns</h1>
+            <p>Ваш тропический рай ждет</p>
+            <a href="#booking" class="btn">Исследовать острова</a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Переключить тему">
+            <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.19" x2="5.64" y2="5.61" />
+                <line x1="18.36" y1="18.39" x2="19.78" y2="19.81" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.19" y1="19.81" x2="5.61" y2="18.39" />
+                <line x1="18.39" y1="5.61" x2="19.81" y2="4.19" />
+            </svg>
+            <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                <path d="M21 12.3A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.3" />
+            </svg>
+        </button>
+    </header>
+
+    <section class="destinations">
+        <h2>Ваши острова мечты</h2>
+        <div class="horizontal-scroll" id="destinations-grid"></div>
+    </section>
+
+    <section class="explore">
+        <div class="explore-content">
+            <h2>Найдите свой рай</h2>
+            <div class="filter">
+                <div>
+                    <label for="continent-filter">Регион</label>
+                    <select id="continent-filter">
+                        <option value="all">Все регионы</option>
+                        <option value="Asia">Азия</option>
+                        <option value="Indian Ocean">Индийский океан</option>
+                        <option value="Atlantic Ocean">Атлантический океан</option>
+                        <option value="Pacific Ocean">Тихий океан</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="type-filter">Тип отдыха</label>
+                    <select id="type-filter">
+                        <option value="all">Все типы</option>
+                        <option value="Beach">Пляжный отдых</option>
+                        <option value="Luxury">Люксовый отдых</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="rating-filter">Рейтинг</label>
+                    <select id="rating-filter">
+                        <option value="all">Все рейтинги</option>
+                        <option value="4.0">≥4.0</option>
+                        <option value="4.5">≥4.5</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="price-filter">Цена за ночь</label>
+                    <select id="price-filter">
+                        <option value="all">Все цены</option>
+                        <option value="100">≤$100</option>
+                        <option value="200">≤$200</option>
+                        <option value="300">≤$300</option>
+                        <option value="400">≤$400</option>
+                        <option value="500">≤$500</option>
+                        <option value="501">>$500</option>
+                    </select>
+                </div>
+                <button class="btn reset-btn" id="reset-filters">Сбросить</button>
+            </div>
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <section class="booking" id="booking">
+        <h2>Забронируйте приключение</h2>
+        <form id="booking-form">
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Ваше имя" required>
+                <span class="input-icon">🌴</span>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Ваш email" required>
+                <span class="input-icon">🌺</span>
+            </div>
+            <div class="input-group">
+                <select id="destination" required>
+                    <option value="" disabled selected>Направление</option>
+                </select>
+                <span class="input-icon">🥥</span>
+            </div>
+            <div class="input-group">
+                <select id="hotel" required>
+                    <option value="" disabled selected>Отель</option>
+                </select>
+                <span class="input-icon">🦪</span>
+            </div>
+            <div class="input-group">
+                <input type="date" id="date" required>
+                <span class="input-icon">☀️</span>
+            </div>
+            <button type="submit" class="btn">Отправить</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="sunset"></div>
+        <p>© 2025 Serene Sojourns. Вдохновлено тропиками.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
